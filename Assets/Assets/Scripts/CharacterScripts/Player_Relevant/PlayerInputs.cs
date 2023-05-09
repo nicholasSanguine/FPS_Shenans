@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerInputs : MonoBehaviour
 {
     public CharInfo charInfo;
-    public WeaponInfo weaponInfo; //Convert to SO soon
+    public PrimaryWeaponSO primaryWeapon;
     public Rigidbody rigidbody;
 
     #region Movement Relevant Info
@@ -77,11 +77,11 @@ public class PlayerInputs : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Mouse0)) 
         {
-            weaponInfo.AttemptShot();//Don't intend on adding a stun of some kind. Statuses would be added to charInfo
+            primaryWeapon.AttemptShot(this.transform);//Don't intend on adding a stun of some kind. Statuses would be added to charInfo
         }
         if (Input.GetKey(KeyCode.Mouse1))
-        { 
-            weaponInfo.AttemptAltFire();//Don't think it'll be adsing for most
+        {
+            primaryWeapon.AttemptAltFire();//Don't think it'll be adsing for most
         }
     }
 
@@ -92,6 +92,8 @@ public class PlayerInputs : MonoBehaviour
         //Little bit of security in case we don't plug it in.
         if(charInfo == null) 
             charInfo = this.GetComponent<CharInfo>();
+
+        primaryWeapon.Started();
     }
 
     // Update is called once per frame
